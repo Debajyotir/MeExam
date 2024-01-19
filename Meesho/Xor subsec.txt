@@ -1,0 +1,34 @@
+int LongestLenXORK(int arr[], int N, int K)
+{
+	
+	
+	int prefixXOR = 0;
+
+	
+	int maxLen = 0;
+
+
+	unordered_map<int, int> mp;
+	
+	
+
+	mp[0] = -1;
+
+	for (int i = 0; i < N; i++) {
+
+		prefixXOR ^= arr[i];
+
+		if (mp.count(prefixXOR ^ K)) {
+
+			maxLen = max(maxLen,
+			(i - mp[prefixXOR ^ K]));
+		}
+		
+		if (!mp.count(prefixXOR)) {
+
+			mp[prefixXOR] = i;
+		}
+	}
+	
+	return maxLen + 1;
+}
